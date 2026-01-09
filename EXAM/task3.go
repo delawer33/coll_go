@@ -9,17 +9,16 @@ func encryptWord(word string) string {
 	if len(word) <= 1 {
 		return word
 	}
-	first := word[0:1]
-	rest := reverseString(word[1:])
-	return first + rest
-}
 
-func reverseString(s string) string {
-	bytes := []byte(s)
-	for i, j := 0, len(bytes)-1; i < j; i, j = i+1, j-1 {
-		bytes[i], bytes[j] = bytes[j], bytes[i]
+	runes := []rune(word)
+	first := runes[0]
+
+	reversed := ""
+	for i := len(runes) - 1; i >= 1; i-- {
+		reversed += string(runes[i])
 	}
-	return string(bytes)
+
+	return string(first) + reversed
 }
 
 func encryptPhrase(phrase string) string {
@@ -39,6 +38,7 @@ func main() {
 		"Salam aleykum",
 		"a",
 		"one two three",
+		"один два три",
 	}
 
 	for _, phrase := range testPhrases {
